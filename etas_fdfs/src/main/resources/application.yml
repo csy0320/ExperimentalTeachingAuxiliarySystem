@@ -1,0 +1,21 @@
+server:
+  port: 8091
+spring:
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/etas_fdfs?useSSL=false
+    username: root
+    password:
+  servlet:
+    multipart:
+      max-file-size: 20MB
+      max-request-size: 200MB
+
+fdfsHost: http://119.28.130.114  # http不能省
+mybatis-plus:
+  mapper-locations: classpath:mapper/**/*xml
+

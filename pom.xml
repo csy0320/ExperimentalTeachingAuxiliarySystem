@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <groupId>org.springframework.cloud</groupId>
+        <artifactId>spring-cloud-starter-parent</artifactId>
+        <version>Hoxton.RELEASE</version>
+        <relativePath/> <!-- lookup parent from repository -->
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>cn.jjdcn.etas</groupId>
+    <artifactId>parent</artifactId>
+    <packaging>pom</packaging>
+    <version>0.0.1</version>
+    <modules>
+        <module>etas_auth</module>
+        <module>etas_common</module>
+        <module>etas_user</module>
+        <module>etas_index</module>
+        <module>etas_api</module>
+        <module>etas_manage</module>
+        <module>etas_fdfs</module>
+    </modules>
+    <name>parent</name>
+    <description>植物病理学实验教学辅助系统</description>
+
+    <properties>
+        <java.version>1.8</java.version>
+        <spring.cloud.alibaba>2.2.0.RELEASE</spring.cloud.alibaba>
+        <mybatisplus.version>3.0.7.1</mybatisplus.version>
+        <nacos.version>0.2.2.RELEASE</nacos.version>
+        <mybatisplus.version>3.0.7.1</mybatisplus.version>
+        <mysql.version>5.1.46</mysql.version>
+        <swagger.version>2.9.2</swagger.version>
+    </properties>
+
+    <dependencyManagement>
+        <!-- Swagger API文档依赖 -->
+        <dependencies>
+            <!-- Swagger API文档依赖 -->
+            <dependency>
+                <groupId>io.swagger</groupId>
+                <artifactId>swagger-annotations</artifactId>
+                <version>1.5.21</version>
+            </dependency>
+            <dependency>
+                <groupId>io.swagger</groupId>
+                <artifactId>swagger-models</artifactId>
+                <version>1.5.21</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
+                <version>${nacos.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
+                <version>${nacos.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>1.18.8</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+</project>

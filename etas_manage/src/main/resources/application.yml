@@ -1,0 +1,30 @@
+server:
+  port: 8090
+spring:
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/etas_manage?useSSL=false
+    username: root
+    password:
+  redis:
+    host: 127.0.0.1
+mybatis-plus:
+  global-config:
+    db-config:
+      id-type: auto
+  mapper-locations: classpath:mapper/manage/**/*.xml
+
+pagehelper:
+  helperDialect: mysql
+  reasonable: true
+  supportMethodsArguments: true
+  params: count=countSql
+
+
+logging:
+  level:
+    cn.jjdcn.etas: debug
