@@ -16,7 +16,7 @@ import java.util.Date;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Document(indexName = "disease",shards = 3,replicas = 2)
+@Document(indexName = "manage", type = "disease",shards = 3,replicas = 2)
 public class Disease {
 
     @Id
@@ -29,6 +29,7 @@ public class Disease {
     /**
      * 病症照片 存储picture-id,';'间隔
      */
+    @Field(type = FieldType.Keyword, index = false)
     private String symptomsPic;
     /**
      * 病症特征
@@ -38,6 +39,7 @@ public class Disease {
     /**
      * 病原图片(显微镜)存储picture-id,';'间隔
      */
+    @Field(type = FieldType.Keyword, index = false)
     private String pathogenPic;
     /**
      * 病原描述
@@ -52,6 +54,7 @@ public class Disease {
     /**
      * 界
      */
+    @Field(type = FieldType.Keyword, index = false)
     private String classDomain;
     /**
      * 门
@@ -91,18 +94,22 @@ public class Disease {
     /**
      * 状态:0正常,1:已删除
      */
+    @Field(type = FieldType.Integer, index = false)
     private Integer status;
     /**
      * 添加者id
      */
+    @Field(type = FieldType.Integer, index = false)
     private Integer userId;
     /**
      * 创建时间
      */
+    @Field(type = FieldType.Date, index = false)
     private Date createTime;
     /**
      * 点击量
      */
+    @Field(type = FieldType.Integer, index = false)
     private Integer clickCount;
     /**
      * 病原种类
