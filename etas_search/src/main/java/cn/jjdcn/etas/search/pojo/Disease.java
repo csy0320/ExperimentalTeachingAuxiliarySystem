@@ -117,3 +117,4 @@ public class Disease {
     @Field(type = FieldType.Keyword, index = false)
     private String pathogenType;
 }
+

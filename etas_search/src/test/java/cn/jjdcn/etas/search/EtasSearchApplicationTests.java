@@ -1,6 +1,5 @@
 package cn.jjdcn.etas.search;
 
-import cn.jjdcn.etas.search.pojo.Disease;
 import cn.jjdcn.etas.search.repository.DiseaseRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
@@ -10,7 +9,7 @@ import org.springframework.data.elasticsearch.core.ElasticsearchRestTemplate;
 
 @SpringBootTest
 @Slf4j
-class AtasSearchApplicationTests {
+class EtasSearchApplicationTests {
 
     @Autowired
     private ElasticsearchRestTemplate restTemplate;
@@ -25,7 +24,6 @@ class AtasSearchApplicationTests {
 //        Disease disease = Disease.builder().id(1).build();
 //        diseaseRepository.save(disease);
 
-        diseaseRepository.findAll().forEach(System.out::println);
 
     }
 
