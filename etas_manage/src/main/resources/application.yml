@@ -25,6 +25,6 @@ pagehelper:
   params: count=countSql
 
 
-logging:
-  level:
-    cn.jjdcn.etas: debug
+#logging:
+#  level:
+#    cn.jjdcn.etas: debug

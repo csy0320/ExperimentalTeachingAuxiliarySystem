@@ -8,9 +8,9 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @EnableSwagger2
 @SpringBootApplication
 @MapperScan(basePackages = "cn.jjdcn.etas.fdfs.dao")
-public class FdfsApplication {
+public class EtasFdfsApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(FdfsApplication.class);
+        SpringApplication.run(EtasFdfsApplication.class);
     }
 }

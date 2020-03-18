@@ -16,7 +16,6 @@
         <module>etas_auth</module>
         <module>etas_common</module>
         <module>etas_user</module>
-        <module>etas_index</module>
         <module>etas_api</module>
         <module>etas_manage</module>
         <module>etas_fdfs</module>

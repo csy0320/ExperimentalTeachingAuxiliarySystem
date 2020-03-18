@@ -10,9 +10,9 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @SpringBootApplication
 @EnableFeignClients
 @MapperScan(basePackages = "cn.jjdcn.etas.manage.dao")
-public class ManageApplication {
+public class EtasManageApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(ManageApplication.class);
+        SpringApplication.run(EtasManageApplication.class);
     }
 }

@@ -1,4 +1,4 @@
-package cn.jjdcn.etas.user.controller;
+package cn.jjdcn.etas.auth.controller;
 
 import cn.jjdcn.etas.common.utils.RandomCaptchaImageUtil;
 import lombok.extern.slf4j.Slf4j;
@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 
 @Slf4j
 @Controller
-@RequestMapping("login")
+@RequestMapping("auth")
 public class CaptchaController {
 
     @Autowired

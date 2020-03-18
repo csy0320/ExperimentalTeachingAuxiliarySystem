@@ -87,14 +87,14 @@ public class DiseaseController {
 		int total = diseaseService.countAllByFilter(dto);
 		Page<Object> objects = PageHelper.startPage(pageCount, pageSize);
 		List<Disease> diseases = diseaseService.queryAllByFilter(dto);
-		if (diseases != null && !diseases.isEmpty()) {
+		if (diseases != null) {
 			HashMap<String, Object> map = Maps.newHashMap();
 			map.put("items",diseases);
 			map.put("total",total);
 			map.put("pageSize",pageSize);
 			return Result.ok().data(map);
 		} else {
-			return Result.error().message("没有数据");
+			return Result.error().message("请求错误");
 		}
 	}
 

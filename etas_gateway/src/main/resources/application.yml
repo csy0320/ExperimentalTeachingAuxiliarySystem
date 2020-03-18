@@ -12,6 +12,28 @@ spring:
             - Path=/user/{segment}
           filters:
             - SetPath=/user/{segment}
+
+        - id: service-fdfs
+          uri: lb://service-fdfs
+          predicates:
+            - Path=/fdfs/{segment}
+          filters:
+            - SetPath=/fdfs/{segment}
+
+        - id: service-manage
+          uri: lb://service-manage
+          predicates:
+            - Path=/api/manage/{segment}
+          filters:
+            - SetPath=/manage/{segment}
+
+        - id: lb://service-search
+          uri: lb://service-fdfs
+          predicates:
+            - Path=/search/{segment}
+          filters:
+            - SetPath=/search/{segment}
+
     nacos:
       discovery:
         server-addr: 127.0.0.1:8848

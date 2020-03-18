@@ -8,7 +8,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
 @Slf4j
-public class ManageApplicationTest {
+public class EtasManageApplicationTest {
 
     @Autowired
     private PictureClient pictureClient;

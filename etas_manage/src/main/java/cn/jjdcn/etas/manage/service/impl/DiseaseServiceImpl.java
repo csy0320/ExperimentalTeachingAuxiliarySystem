@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * 植病表(Disease)表服务实现类
@@ -196,14 +197,14 @@ public class DiseaseServiceImpl implements DiseaseService {
     @Override
     public Map queryBaseInfo() {
         HashMap<Object, Object> baseInfo = Maps.newHashMap();
-        baseInfo.put("diseaseNames", this.diseaseDao.queryBaseInfo("name"));
-        baseInfo.put("classGenuses", this.diseaseDao.queryBaseInfo("class_genus"));
-        baseInfo.put("classClasses", this.diseaseDao.queryBaseInfo("class_class"));
-        baseInfo.put("classOrders", this.diseaseDao.queryBaseInfo("class_order"));
-        baseInfo.put("classFamilies", this.diseaseDao.queryBaseInfo("class_family"));
-        baseInfo.put("classPhylums", this.diseaseDao.queryBaseInfo("class_phylum"));
-        baseInfo.put("virusTypes", this.diseaseDao.queryBaseInfo("virus_type"));
-        baseInfo.put("classSpecies", this.diseaseDao.queryBaseInfo("class_species"));
+        baseInfo.put("diseaseNames", this.diseaseDao.queryBaseInfo("name").stream().filter(Objects::nonNull).collect(Collectors.toList()));
+        baseInfo.put("classGenuses", this.diseaseDao.queryBaseInfo("class_genus").stream().filter(Objects::nonNull).collect(Collectors.toList()));
+        baseInfo.put("classClasses", this.diseaseDao.queryBaseInfo("class_class").stream().filter(Objects::nonNull).collect(Collectors.toList()));
+        baseInfo.put("classOrders", this.diseaseDao.queryBaseInfo("class_order").stream().filter(Objects::nonNull).collect(Collectors.toList()));
+        baseInfo.put("classFamilies", this.diseaseDao.queryBaseInfo("class_family").stream().filter(Objects::nonNull).collect(Collectors.toList()));
+        baseInfo.put("classPhylums", this.diseaseDao.queryBaseInfo("class_phylum").stream().filter(Objects::nonNull).collect(Collectors.toList()));
+        baseInfo.put("virusTypes", this.diseaseDao.queryBaseInfo("virus_type").stream().filter(Objects::nonNull).collect(Collectors.toList()));
+        baseInfo.put("classSpecies", this.diseaseDao.queryBaseInfo("class_species").stream().filter(Objects::nonNull).collect(Collectors.toList()));
         return baseInfo;
     }
 }
