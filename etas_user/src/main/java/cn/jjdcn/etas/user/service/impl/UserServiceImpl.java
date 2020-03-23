@@ -1,20 +1,18 @@
 package cn.jjdcn.etas.user.service.impl;
 
-import com.baomidou.mybatisplus.core.conditions.Wrapper;
+import cn.jjdcn.etas.common.bean.PageVo;
+import cn.jjdcn.etas.common.bean.Query;
+import cn.jjdcn.etas.common.bean.QueryCondition;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
-import java.util.Map;
 import java.util.UUID;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import cn.jjdcn.etas.common.bean.PageVo;
-import cn.jjdcn.etas.common.bean.Query;
-import cn.jjdcn.etas.common.bean.QueryCondition;
 
 import cn.jjdcn.etas.user.mapper.UserMapper;
 import cn.jjdcn.etas.user.entity.User;

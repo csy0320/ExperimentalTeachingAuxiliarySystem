@@ -1,7 +1,7 @@
 package cn.jjdcn.etas.manage.service.impl;
 
-import cn.jjdcn.etas.manage.entity.Setting;
 import cn.jjdcn.etas.manage.dao.SettingDao;
+import cn.jjdcn.etas.manage.entity.Setting;
 import cn.jjdcn.etas.manage.service.SettingService;
 import org.springframework.stereotype.Service;
 

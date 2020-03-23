@@ -2,39 +2,48 @@ server:
   port: 8050
 spring:
   application:
-    name: service-gateway
+#    name: service-gateway
   cloud:
     gateway:
       routes:
         - id: service-user
           uri: lb://service-user
           predicates:
-            - Path=/user/{segment}
+            - Path=/api/user/**
           filters:
-            - SetPath=/user/{segment}
+            - RewritePath=/api(?<segment>/?.*), $\{segment}
+
+        - id: service-auth
+          uri: lb://service-auth
+          predicates:
+            - Path=/api/auth/**
+          filters:
+            - RewritePath=/api(?<segment>/?.*), $\{segment}
+
 
         - id: service-fdfs
           uri: lb://service-fdfs
           predicates:
-            - Path=/fdfs/{segment}
+            - Path=/api/fdfs/**
           filters:
-            - SetPath=/fdfs/{segment}
+            - RewritePath=/api(?<segment>/?.*), $\{segment}
 
         - id: service-manage
           uri: lb://service-manage
           predicates:
-            - Path=/api/manage/{segment}
+          - Path=/api/manage/**
           filters:
-            - SetPath=/manage/{segment}
+          - RewritePath=/api(?<segment>/?.*), $\{segment}
 
-        - id: lb://service-search
-          uri: lb://service-fdfs
-          predicates:
-            - Path=/search/{segment}
-          filters:
-            - SetPath=/search/{segment}
+
+#        - id: lb://service-search
+#          uri: lb://service-search
+#          predicates:
+#            - Path=/api/search/{segment}
+#          filters:
+#            - RewritePath=/api(?<segment>/?.*), $\{segment}
 
     nacos:
       discovery:
-        server-addr: 127.0.0.1:8848
+        server-addr: 192.168.1.11:8848
 

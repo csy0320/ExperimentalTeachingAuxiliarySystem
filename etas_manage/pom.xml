@@ -10,7 +10,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>etas-manage</artifactId>
-
+    <groupId>cn.jjdcn.etas</groupId>
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -75,5 +75,12 @@
             </exclusions>
         </dependency>
     </dependencies>
-
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
 </project>

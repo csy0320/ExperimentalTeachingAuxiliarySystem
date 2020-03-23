@@ -6,7 +6,7 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 @SpringBootApplication
-@EnableFeignClients
+@EnableFeignClients(basePackages = "cn.jjdcn.etas.auth.feign")
 @EnableSwagger2
 public class EtasAuthApplication {
 

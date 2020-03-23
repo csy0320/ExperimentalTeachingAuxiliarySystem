@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.concurrent.TimeUnit;
 
 @Slf4j
 @Controller
@@ -32,7 +33,7 @@ public class CaptchaController {
             //输出验证码图片方法
             String code = captchaImageUtil.getRandCode(request, response);
 //            request.getSession().setAttribute("CaptchaCode",code);
-            stringRedisTemplate.opsForValue().set("captcha"+request.getSession().getId(),code);
+            stringRedisTemplate.opsForValue().set("captcha"+request.getSession().getId(),code,60, TimeUnit.SECONDS);
             log.info(request.getSession().getId()+"::" + stringRedisTemplate.opsForValue().get("captcha" + request.getSession().getId()));
         } catch (Exception e) {
             log.error("获取验证码失败>>>>   ", e);

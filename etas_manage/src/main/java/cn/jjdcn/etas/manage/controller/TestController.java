@@ -1,6 +1,5 @@
 package cn.jjdcn.etas.manage.controller;
 
-import cn.jjdcn.etas.common.bean.Result;
 import cn.jjdcn.etas.fdfs.entity.Picture;
 import cn.jjdcn.etas.manage.auth.annotation.CheckAuth;
 import cn.jjdcn.etas.manage.feign.PictureClient;
@@ -21,7 +20,7 @@ public class TestController {
     private PictureClient pictureClient;
 
     @GetMapping("disease")
-    @CheckAuth("")
+    @CheckAuth()
     public ResponseEntity<String> getAllDisease() {
         return new ResponseEntity<>("访问成功", HttpStatus.OK);
     }

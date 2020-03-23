@@ -1,7 +1,6 @@
 package cn.jjdcn.etas.fdfs.service;
 
 import cn.jjdcn.etas.fdfs.entity.Picture;
-import io.swagger.models.auth.In;
 
 import java.util.List;
 

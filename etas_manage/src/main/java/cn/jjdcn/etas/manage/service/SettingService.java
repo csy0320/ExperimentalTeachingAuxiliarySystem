@@ -1,7 +1,6 @@
 package cn.jjdcn.etas.manage.service;
 
 import cn.jjdcn.etas.manage.entity.Setting;
-import com.github.pagehelper.Page;
 
 import java.util.List;
 

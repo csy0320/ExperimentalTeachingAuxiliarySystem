@@ -1,7 +1,7 @@
 package cn.jjdcn.etas.fdfs.service.impl;
 
-import cn.jjdcn.etas.fdfs.entity.Picture;
 import cn.jjdcn.etas.fdfs.dao.PictureDao;
+import cn.jjdcn.etas.fdfs.entity.Picture;
 import cn.jjdcn.etas.fdfs.service.PictureService;
 import cn.jjdcn.etas.fdfs.utils.FastdfsClient;
 import org.springframework.stereotype.Service;

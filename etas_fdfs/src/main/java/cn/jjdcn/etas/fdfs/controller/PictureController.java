@@ -4,7 +4,6 @@ import cn.jjdcn.etas.common.bean.Result;
 import cn.jjdcn.etas.fdfs.entity.Picture;
 import cn.jjdcn.etas.fdfs.service.PictureService;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,7 +17,7 @@ import java.util.*;
  */
 @Slf4j
 @RestController
-@RequestMapping("picture")
+@RequestMapping("fdfs/picture")
 public class PictureController {
 	/**
 	 * 服务对象

@@ -1,23 +1,21 @@
 package cn.jjdcn.etas.manage.auth;
 
 import cn.jjdcn.etas.common.exception.RRException;
-import cn.jjdcn.etas.common.utils.JwtUtils;
 import cn.jjdcn.etas.common.utils.MyJwtUtil;
-import cn.jjdcn.etas.manage.auth.annotation.CheckAuth;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
-import org.aspectj.lang.Signature;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
-import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
-import org.springframework.web.servlet.mvc.condition.RequestConditionHolder;
 
 import javax.servlet.http.HttpServletRequest;
-import java.lang.reflect.Method;
+
+/**
+ * @author cai
+ */
 
 @Aspect
 @Component
@@ -29,7 +27,7 @@ public class AuthAspect {
         RequestAttributes requestAttributes = RequestContextHolder.getRequestAttributes();
         ServletRequestAttributes attributes = (ServletRequestAttributes) requestAttributes;
         HttpServletRequest request = attributes.getRequest();
-        String token = request.getHeader("Token");
+        String token = request.getHeader("Authorization");
         try {
             String id = MyJwtUtil.parseJWT(token).getId();
 
@@ -43,7 +41,7 @@ public class AuthAspect {
 //        String value = checkAuth.value();
 
             if (!(Long.valueOf(id) == 1L)) {
-                throw new RRException("权限不足");
+                throw new RRException("权限不足", 20003);
             }
 
             return joinPoint.proceed();

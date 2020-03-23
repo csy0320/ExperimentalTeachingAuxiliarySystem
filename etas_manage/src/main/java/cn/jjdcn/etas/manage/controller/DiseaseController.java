@@ -1,6 +1,7 @@
 package cn.jjdcn.etas.manage.controller;
 
 import cn.jjdcn.etas.common.bean.Result;
+import cn.jjdcn.etas.manage.auth.annotation.CheckAuth;
 import cn.jjdcn.etas.manage.entity.Disease;
 import cn.jjdcn.etas.manage.pojo.vo.DiseaseVO;
 import cn.jjdcn.etas.manage.service.DiseaseService;
@@ -104,6 +105,7 @@ public class DiseaseController {
 	 * @param diseaseDto
 	 * @return
 	 */
+	@CheckAuth
 	@PostMapping("add")
 	public Result add(@Valid @RequestBody DiseaseDto diseaseDto) {
 
@@ -124,6 +126,7 @@ public class DiseaseController {
 	 * @param diseaseDto
 	 * @return
 	 */
+	@CheckAuth
 	@PutMapping("update")
 	public Result update(@RequestBody DiseaseDto diseaseDto) {
 		int update = diseaseService.update(diseaseDto);
@@ -140,6 +143,7 @@ public class DiseaseController {
 	 * @param id
 	 * @return
 	 */
+	@CheckAuth
 	@DeleteMapping("delete/{id}")
 	public Result delete(@PathVariable Integer id) {
 		if (diseaseService.deleteById(id)) {

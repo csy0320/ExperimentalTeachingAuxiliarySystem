@@ -23,8 +23,8 @@ public class FastdfsClient {
     //初始化FastDFS Client
     static {
         try {
-            String filePath = new ClassPathResource("fdfs_client.conf").getFile().getAbsolutePath();
-            ClientGlobal.init(filePath);
+            ClassPathResource classPathResource = new ClassPathResource("fdfs_client.conf");
+            ClientGlobal.init(classPathResource.getClassLoader().getResource("fdfs_client.conf").toURI().getPath());
             TrackerClient trackerClient = new TrackerClient(ClientGlobal.g_tracker_group);
             TrackerServer trackerServer = trackerClient.getConnection();
 

@@ -20,7 +20,7 @@ import java.util.Map;
 @Slf4j
 @RestController
 @RequestMapping("manage/setting")
-public class SettingController {
+public class MySettingController {
     /**
      * 服务对象
      */

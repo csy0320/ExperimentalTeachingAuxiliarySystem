@@ -1,7 +1,6 @@
 package cn.jjdcn.etas.gateway.config;
 
 import cn.jjdcn.etas.common.utils.MyJwtUtil;
-import io.jsonwebtoken.Claims;
 import org.springframework.cloud.gateway.filter.GatewayFilter;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
 import org.springframework.http.HttpCookie;

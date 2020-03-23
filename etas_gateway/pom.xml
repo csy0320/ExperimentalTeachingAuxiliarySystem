@@ -7,7 +7,6 @@
         <artifactId>parent</artifactId>
         <version>0.0.1</version>
     </parent>
-    <groupId>cn.jjdcn.etas</groupId>
     <artifactId>etas-gateway</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>etas-gateway</name>

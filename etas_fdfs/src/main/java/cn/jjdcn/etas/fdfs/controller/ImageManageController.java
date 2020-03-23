@@ -6,32 +6,20 @@ import cn.jjdcn.etas.fdfs.utils.FastdfsClient;
 import com.google.common.collect.Maps;
 import com.google.common.io.Files;
 import lombok.extern.slf4j.Slf4j;
-import org.csource.common.MyException;
-import org.csource.common.NameValuePair;
-import org.csource.fastdfs.StorageClient1;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
-import org.springframework.web.multipart.MultipartRequest;
 
-import javax.servlet.http.HttpServletRequest;
 import java.io.*;
-import java.nio.ByteBuffer;
-import java.nio.channels.FileChannel;
-import java.nio.channels.ReadableByteChannel;
-import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.UUID;
 
 @RestController
-@RequestMapping("image")
+@RequestMapping("fdfs/image")
 @Slf4j
 public class ImageManageController {
 

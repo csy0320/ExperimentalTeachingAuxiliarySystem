@@ -1,9 +1,9 @@
 package cn.jjdcn.etas.auth.service;
 
-import cn.jjdcn.etas.auth.feign.UserClient;
 import cn.jjdcn.etas.common.bean.Result;
+import cn.jjdcn.etas.auth.feign.UserClient;
 import cn.jjdcn.etas.common.utils.MyJwtUtil;
-import cn.jjdcn.etas.user.entity.User;
+import cn.jjdcn.etas.user.pojo.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

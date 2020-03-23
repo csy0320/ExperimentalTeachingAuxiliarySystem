@@ -1,9 +1,8 @@
 package cn.jjdcn.etas.manage.service.impl;
 
-import cn.jjdcn.etas.common.bean.Result;
+import cn.jjdcn.etas.manage.dao.DiseaseDao;
 import cn.jjdcn.etas.fdfs.entity.Picture;
 import cn.jjdcn.etas.manage.entity.Disease;
-import cn.jjdcn.etas.manage.dao.DiseaseDao;
 import cn.jjdcn.etas.manage.feign.PictureClient;
 import cn.jjdcn.etas.manage.pojo.vo.DiseaseVO;
 import cn.jjdcn.etas.manage.service.DiseaseService;

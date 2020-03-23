@@ -1,7 +1,7 @@
 package cn.jjdcn.etas.user.api;
 
 import cn.jjdcn.etas.common.bean.Result;
-import cn.jjdcn.etas.user.entity.User;
+import cn.jjdcn.etas.user.pojo.User;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 

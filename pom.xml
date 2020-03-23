@@ -19,6 +19,7 @@
         <module>etas_api</module>
         <module>etas_manage</module>
         <module>etas_fdfs</module>
+        <module>etas_user_interface</module>
     </modules>
     <name>parent</name>
     <description>植物病理学实验教学辅助系统</description>
