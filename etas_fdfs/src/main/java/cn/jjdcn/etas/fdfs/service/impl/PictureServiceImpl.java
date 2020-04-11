@@ -3,7 +3,7 @@ package cn.jjdcn.etas.fdfs.service.impl;
 import cn.jjdcn.etas.fdfs.dao.PictureDao;
 import cn.jjdcn.etas.fdfs.entity.Picture;
 import cn.jjdcn.etas.fdfs.service.PictureService;
-import cn.jjdcn.etas.fdfs.utils.FastdfsClient;
+import cn.jjdcn.etas.fdfs.utils.MyFastDFSClient;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -79,8 +79,8 @@ public class PictureServiceImpl implements PictureService {
     }
 
     @Override
-    public int deleteImage(String fileId) {
-        return FastdfsClient.deleteFile(fileId);
+    public boolean deleteImage(String fileId) {
+        return MyFastDFSClient.deleteFile(fileId);
     }
 
     @Override

@@ -1,8 +1,5 @@
-server:
-  port: 8050
 spring:
-  application:
-#    name: service-gateway
+  profiles: dev
   cloud:
     gateway:
       routes:
@@ -31,17 +28,113 @@ spring:
         - id: service-manage
           uri: lb://service-manage
           predicates:
-          - Path=/api/manage/**
+            - Path=/api/manage/**
           filters:
-          - RewritePath=/api(?<segment>/?.*), $\{segment}
+            - RewritePath=/api(?<segment>/?.*), $\{segment}
 
 
-#        - id: lb://service-search
-#          uri: lb://service-search
-#          predicates:
-#            - Path=/api/search/{segment}
-#          filters:
-#            - RewritePath=/api(?<segment>/?.*), $\{segment}
+        - id: service-search
+          uri: lb://service-search
+          predicates:
+            - Path=/api/search/{segment}
+          filters:
+            - RewritePath=/api(?<segment>/?.*), $\{segment}
+
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
+
+---
+
+spring:
+  profiles: test
+  cloud:
+    gateway:
+      routes:
+        - id: service-user
+          uri: lb://service-user
+          predicates:
+            - Path=/api/user/**
+          filters:
+            - RewritePath=/api(?<segment>/?.*), $\{segment}
+
+        - id: service-auth
+          uri: lb://service-auth
+          predicates:
+            - Path=/api/auth/**
+          filters:
+            - RewritePath=/api(?<segment>/?.*), $\{segment}
+
+
+        - id: service-fdfs
+          uri: lb://service-fdfs
+          predicates:
+            - Path=/api/fdfs/**
+          filters:
+            - RewritePath=/api(?<segment>/?.*), $\{segment}
+
+        - id: service-manage
+          uri: lb://service-manage
+          predicates:
+            - Path=/api/manage/**
+          filters:
+            - RewritePath=/api(?<segment>/?.*), $\{segment}
+
+
+        - id: service-search
+          uri: lb://service-search
+          predicates:
+            - Path=/api/search/{segment}
+          filters:
+            - RewritePath=/api(?<segment>/?.*), $\{segment}
+
+    nacos:
+      discovery:
+        server-addr: 192.168.1.11:8848
+
+# 生产
+---
+spring:
+  profiles: prod
+  cloud:
+    gateway:
+      routes:
+        - id: service-user
+          uri: lb://service-user
+          predicates:
+            - Path=/api/user/**
+          filters:
+            - RewritePath=/api(?<segment>/?.*), $\{segment}
+
+        - id: service-auth
+          uri: lb://service-auth
+          predicates:
+            - Path=/api/auth/**
+          filters:
+            - RewritePath=/api(?<segment>/?.*), $\{segment}
+
+
+        - id: service-fdfs
+          uri: lb://service-fdfs
+          predicates:
+            - Path=/api/fdfs/**
+          filters:
+            - RewritePath=/api(?<segment>/?.*), $\{segment}
+
+        - id: service-manage
+          uri: lb://service-manage
+          predicates:
+            - Path=/api/manage/**
+          filters:
+            - RewritePath=/api(?<segment>/?.*), $\{segment}
+
+
+        - id: service-search
+          uri: lb://service-search
+          predicates:
+            - Path=/api/search/{segment}
+          filters:
+            - RewritePath=/api(?<segment>/?.*), $\{segment}
 
     nacos:
       discovery:

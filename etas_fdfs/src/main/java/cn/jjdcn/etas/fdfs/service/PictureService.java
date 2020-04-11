@@ -53,7 +53,7 @@ public interface PictureService {
      */
     boolean deleteById(Integer id);
 
-    int deleteImage(String fileId);
+    boolean deleteImage(String fileId);
 
     Picture queryByFileId(String fileId);
 

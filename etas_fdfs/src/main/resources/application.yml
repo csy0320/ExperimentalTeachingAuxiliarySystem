@@ -1,6 +1,54 @@
 server:
   port: 8095
 spring:
+  profiles: dev
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/etas_fdfs?useSSL=false
+    username: root
+    password:
+  servlet:
+    multipart:
+      max-file-size: 20MB
+      max-request-size: 200MB
+
+#fdfsHost: http://119.28.130.114  # http不能省
+mybatis-plus:
+  mapper-locations: classpath:mapper/**/*xml
+
+
+#####################fdfs########################
+# 分布式文件系统fastdfs配置
+fdfs:
+  # socket连接超时时长
+  soTimeout: 1500
+  # 连接tracker服务器超时时长
+  connectTimeout: 600
+  pool:
+    # 从池中借出的对象的最大数目
+    max-total: 153
+    # 获取连接时的最大等待毫秒数100
+    max-wait-millis: 102
+  # 缩略图生成参数，可选
+  thumbImage:
+    width: 150
+    height: 150
+  # 跟踪服务器tracker_server请求地址,支持多个，这里只有一个，如果有多个在下方加- x.x.x.x:port
+  trackerList:
+    - 124.156.166.153:22122
+  #
+  # 存储服务器storage_server访问地址
+  web-server-url: https://api.jjdcn.cn/
+
+---
+server:
+  port: 8095
+spring:
+  profiles: test
   cloud:
     nacos:
       discovery:
@@ -15,7 +63,77 @@ spring:
       max-file-size: 20MB
       max-request-size: 200MB
 
-fdfsHost: http://119.28.130.114  # http不能省
+#fdfsHost: http://119.28.130.114  # http不能省
 mybatis-plus:
   mapper-locations: classpath:mapper/**/*xml
 
+
+#####################fdfs########################
+# 分布式文件系统fastdfs配置
+fdfs:
+  # socket连接超时时长
+  soTimeout: 1500
+  # 连接tracker服务器超时时长
+  connectTimeout: 600
+  pool:
+    # 从池中借出的对象的最大数目
+    max-total: 153
+    # 获取连接时的最大等待毫秒数100
+    max-wait-millis: 102
+  # 缩略图生成参数，可选
+  thumbImage:
+    width: 150
+    height: 150
+  # 跟踪服务器tracker_server请求地址,支持多个，这里只有一个，如果有多个在下方加- x.x.x.x:port
+  trackerList:
+    - 47.100.57.185:22122
+  #
+  # 存储服务器storage_server访问地址
+  web-server-url: https://api.jjdcn.cn/
+
+---
+server:
+  port: 8095
+spring:
+  profiles: prod
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 192.168.1.11:8848
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://192.168.1.11:3306/etas_fdfs?useSSL=false
+    username: root
+    password: root
+  servlet:
+    multipart:
+      max-file-size: 20MB
+      max-request-size: 200MB
+
+#fdfsHost: http://119.28.130.114  # http不能省
+mybatis-plus:
+  mapper-locations: classpath:mapper/**/*xml
+
+
+#####################fdfs########################
+# 分布式文件系统fastdfs配置
+fdfs:
+  # socket连接超时时长
+  soTimeout: 1500
+  # 连接tracker服务器超时时长
+  connectTimeout: 600
+  pool:
+    # 从池中借出的对象的最大数目
+    max-total: 153
+    # 获取连接时的最大等待毫秒数100
+    max-wait-millis: 102
+  # 缩略图生成参数，可选
+  thumbImage:
+    width: 150
+    height: 150
+  # 跟踪服务器tracker_server请求地址,支持多个，这里只有一个，如果有多个在下方加- x.x.x.x:port
+  trackerList:
+    - 47.100.57.185:22122
+  #
+  # 存储服务器storage_server访问地址
+  web-server-url: https://api.jjdcn.cn/

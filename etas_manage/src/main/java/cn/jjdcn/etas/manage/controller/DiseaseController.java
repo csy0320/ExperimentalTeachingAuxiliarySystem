@@ -153,4 +153,38 @@ public class DiseaseController {
 		}
 	}
 
+
+//	/**
+//	 * 通过主键查询单条数据
+//	 *
+//	 * @param id 主键
+//	 * @return 单条数据
+//	 */
+//	@GetMapping("get/{id}")
+//	public Disease getById(@PathVariable Integer id) {
+//		DiseaseVO diseaseVO = diseaseService.queryById(id);
+//		if (diseaseVO != null) {
+//			Map<String, DiseaseVO> map = new HashMap<>();
+//			map.put("item", diseaseVO);
+//			return Result.ok().data(map);
+//		}else {
+//			return Result.error().message("没有数据");
+//		}
+//	}
+
+	/**
+	 * 获得所有数据给API
+	 *
+	 * @return
+	 */
+	@GetMapping("api/get")
+	public List<Disease> getAllDisease() {
+
+		List<Disease> diseases = diseaseService.queryAll();
+		if (diseases != null && !diseases.isEmpty()) {
+			return diseases;
+		} else {
+			return null;
+		}
+	}
 }

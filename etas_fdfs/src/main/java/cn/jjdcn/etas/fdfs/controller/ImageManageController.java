@@ -2,29 +2,29 @@ package cn.jjdcn.etas.fdfs.controller;
 
 import cn.jjdcn.etas.fdfs.entity.Picture;
 import cn.jjdcn.etas.fdfs.service.PictureService;
-import cn.jjdcn.etas.fdfs.utils.FastdfsClient;
+import cn.jjdcn.etas.fdfs.utils.MyFastDFSClient;
 import com.google.common.collect.Maps;
-import com.google.common.io.Files;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.*;
+import java.io.IOException;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+
+//import cn.jjdcn.etas.fdfs.utils.FastdfsClient;
 
 @RestController
 @RequestMapping("fdfs/image")
 @Slf4j
 public class ImageManageController {
-
-    @Value("${fdfsHost}")
-    private String fdfsHost;
 
     @Autowired
     private PictureService pictureService;
@@ -32,8 +32,8 @@ public class ImageManageController {
     @PostMapping("upload")
     public ResponseEntity<Map> uploadImage(@RequestParam("file") MultipartFile mf) throws IOException {
         Map<String, String> meta = Maps.newHashMap();
-        String fileid = FastdfsClient.uploadFile(mf.getBytes(), Files.getFileExtension(mf.getOriginalFilename()), meta);
-        String url = fdfsHost + "/" + fileid;
+        String fileid = MyFastDFSClient.uploadFile(mf);
+        String url = MyFastDFSClient.getResAccessUrl(fileid);
         Picture picture = Picture.builder().originName(mf.getOriginalFilename()).caption(mf.getOriginalFilename().substring(0,mf.getOriginalFilename().lastIndexOf(".")))
                 .fileId(fileid).url(url).status(0).createTime(new Date()).userId(1L).build();
         pictureService.insert(picture);
@@ -47,9 +47,9 @@ public class ImageManageController {
     @PostMapping("delete")
     public ResponseEntity<String> uploadImage(@RequestParam("fileId") String fileId) throws IOException {
         log.info("fileid:{}", fileId);
-        int i = pictureService.deleteImage(fileId);
+        boolean deleted = pictureService.deleteImage(fileId);
         String msg;
-        if (i == 0) {
+        if (deleted) {
             msg = "OK";
         } else {
             msg = "ERROR";

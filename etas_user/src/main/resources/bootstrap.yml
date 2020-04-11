@@ -1,23 +1,31 @@
 spring:
   profiles:
     active: dev
-
----
-spring:
-  profiles: dev
   application:
     name: service-user
+
+---
+# 开发环境
+spring:
+  profiles: dev
+  cloud:
+    nacos:
+      config:
+        server-addr: 127.0.0.1:8848
+---
+# 测试环境
+spring:
+  profiles: test
   cloud:
     nacos:
       config:
         server-addr: 192.168.1.11:8848
 
 ---
-
+# 生产环境
 spring:
   profiles: prod
-  application:
-    name: service-user
+
   cloud:
     nacos:
       config:

@@ -5,14 +5,14 @@ ENV LANG en_US.UTF-8
 ENV LANGUAGE en_US:en
 ENV LC_ALL en_US.UTF-8
 # 将当前目录下的jar包复制到docker容器的/目录下
-ADD target/etas-auth-0.0.1.jar /etas-auth-0.0.1.jar
+ADD target/etas-search-0.0.1.jar /etas-search-0.0.1.jar
 # 设置时区
 RUN /bin/cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && echo 'Asia/Shanghai' >/etc/timezone
 # 运行过程中创建一个mall-tiny-docker-file.jar文件
-RUN bash -c 'touch /etas-auth-0.0.1.jar'
+RUN bash -c 'touch /etas-search-0.0.1.jar'
 # 声明服务运行在8080端口
-EXPOSE 8070
+EXPOSE 8030
 # 指定docker容器启动时运行jar包
-ENTRYPOINT ["java", "-jar", "/etas-auth-0.0.1.jar"]
+ENTRYPOINT ["java", "-jar", "/etas-search-0.0.1.jar"]
 # 指定维护者的名字
 MAINTAINER cai

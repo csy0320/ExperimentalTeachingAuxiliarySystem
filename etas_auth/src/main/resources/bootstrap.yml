@@ -1,6 +1,28 @@
 spring:
   application:
     name: service-auth
+
+  profiles:
+    active: dev
+
+---
+spring:
+  profiles: dev
+  cloud:
+    nacos:
+      config:
+        server-addr: 127.0.0.1:8848
+---
+spring:
+  profiles: test
+  cloud:
+    nacos:
+      config:
+        server-addr: 192.168.1.11:8848
+
+---
+spring:
+  profiles: prod
   cloud:
     nacos:
       config:
