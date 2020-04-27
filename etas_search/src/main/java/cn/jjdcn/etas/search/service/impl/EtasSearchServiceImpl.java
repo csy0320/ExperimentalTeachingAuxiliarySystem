@@ -48,7 +48,7 @@ public class EtasSearchServiceImpl implements EtasSearchService {
                 highlightFields.forEach((s, highlightField) -> {
                     System.out.println("s = " + s);
                     System.out.println("highlightFields.get(s) = " + highlightFields.get(s).getFragments()[0]);
-                    disease.setName(highlightFields.get(s).getFragments()[0].toString());
+                    disease.set(s, highlightFields.get(s).getFragments()[0].toString());
                 });
                 diseases.add(disease);
             }
@@ -63,10 +63,34 @@ public class EtasSearchServiceImpl implements EtasSearchService {
         String keyword = searchParam.getKeyword();
 
         BoolQueryBuilder boolQueryBuilder = QueryBuilders.boolQuery();
+        boolQueryBuilder
+                .should(QueryBuilders.matchQuery("name", keyword))
+                .should(QueryBuilders.matchQuery("symptomsDesc", keyword))
+                .should(QueryBuilders.matchQuery("pathogenDesc", keyword))
+                .should(QueryBuilders.matchQuery("prevention", keyword))
+                .should(QueryBuilders.matchQuery("classFamily", keyword))
+                .should(QueryBuilders.matchQuery("classOrder", keyword))
+                .should(QueryBuilders.matchQuery("classClass", keyword))
+                .should(QueryBuilders.matchQuery("classGenus", keyword))
+                .should(QueryBuilders.matchQuery("classSpecies", keyword))
+                .should(QueryBuilders.matchQuery("virusType", keyword))
+                .should(QueryBuilders.matchQuery("pathogenType", keyword));
 
-        boolQueryBuilder.must(QueryBuilders.matchQuery("name", keyword));
         SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
-        searchSourceBuilder.highlighter(new HighlightBuilder().field("name").preTags("<em>").postTags("</em>"));
+
+        searchSourceBuilder.highlighter(new HighlightBuilder()
+                .field("name").preTags("<em>").postTags("</em>")
+                .field("symptomsDesc").preTags("<em>").postTags("</em>")
+                .field("pathogenDesc").preTags("<em>").postTags("</em>")
+                .field("prevention").preTags("<em>").postTags("</em>")
+                .field("classFamily").preTags("<em>").postTags("</em>")
+                .field("classOrder").preTags("<em>").postTags("</em>")
+                .field("classClass").preTags("<em>").postTags("</em>")
+                .field("classGenus").preTags("<em>").postTags("</em>")
+                .field("classSpecies").preTags("<em>").postTags("</em>")
+                .field("virusType").preTags("<em>").postTags("</em>")
+                .field("pathogenType").preTags("<em>").postTags("</em>")
+                .field("").preTags("<em>").postTags("</em>"));
         searchSourceBuilder.query(boolQueryBuilder);
 
         SearchRequest searchRequest = new SearchRequest("manage");

@@ -1,9 +1,6 @@
 server:
   port: 8030
-spring:
-  elasticsearch:
-    rest:
-      uris: 192.168.1.11:9200
+
 ---
 spring:
   profiles: dev
@@ -11,19 +8,28 @@ spring:
     nacos:
       discovery:
         server-addr: 127.0.0.1:8848
+  elasticsearch:
+    rest:
+      uris: 127.0.0.1:9200
 
----
-spring:
-  profiles: test
-  cloud:
-    nacos:
-      discovery:
-        server-addr: 192.168.1.11:8848
-
----
-spring:
-  profiles: prod
-  cloud:
-    nacos:
-      discovery:
-        server-addr: 192.168.1.11:8848
+#---
+#spring:
+#  profiles: test
+#  cloud:
+#    nacos:
+#      discovery:
+#        server-addr: 192.168.1.11:8848
+#  elasticsearch:
+#    rest:
+#      uris: 127.0.0.1:9200
+#
+#---
+#spring:
+#  profiles: prod
+#  cloud:
+#    nacos:
+#      discovery:
+#        server-addr: 192.168.1.11:8848
+#  elasticsearch:
+#    rest:
+#      uris: 192.168.1.11:9200

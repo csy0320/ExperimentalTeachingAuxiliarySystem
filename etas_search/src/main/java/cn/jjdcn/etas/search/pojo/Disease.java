@@ -16,7 +16,7 @@ import java.util.Date;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Document(indexName = "manage", type = "disease",shards = 3,replicas = 2)
+@Document(indexName = "manage", type = "disease", shards = 3, replicas = 2)
 public class Disease {
 
     @Id
@@ -54,7 +54,7 @@ public class Disease {
     /**
      * 界
      */
-    @Field(type = FieldType.Keyword, index = false)
+    @Field(type = FieldType.Text, analyzer = "ik_max_word")
     private String classDomain;
     /**
      * 门
@@ -84,7 +84,7 @@ public class Disease {
     /**
      * 种(病原)
      */
-    @Field(type = FieldType.Text, index = false)
+    @Field(type = FieldType.Text, analyzer = "ik_max_word")
     private String classSpecies;
     /**
      * 病毒种类
@@ -114,7 +114,52 @@ public class Disease {
     /**
      * 病原种类
      */
-    @Field(type = FieldType.Keyword, index = false)
+    @Field(type = FieldType.Text, analyzer = "ik_max_word")
     private String pathogenType;
+
+    public void set(String key, String value) {
+        switch (key) {
+            case "name":
+                this.setName(value);
+                break;
+            case "symptomsDesc":
+                this.setSymptomsDesc(value);
+                break;
+            case "pathogenDesc":
+                this.setPathogenDesc(value);
+                break;
+            case "prevention":
+                this.setPrevention(value);
+                break;
+            case "classDomain":
+                this.setClassDomain(value);
+                break;
+            case "classPhylum":
+                this.setClassPhylum(value);
+                break;
+            case "classFamily":
+                this.setClassFamily(value);
+                break;
+            case "classOrder":
+                this.setClassOrder(value);
+                break;
+            case "classClass":
+                this.setClassClass(value);
+                break;
+            case "classGenus":
+                this.setClassGenus(value);
+                break;
+            case "classSpecies":
+                this.setClassSpecies(value);
+                break;
+            case "virusType":
+                this.setVirusType(value);
+                break;
+            case "pathogenType":
+                this.setPathogenType(value);
+                break;
+            default:
+        }
+    }
 }
 
