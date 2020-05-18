@@ -1,15 +1,19 @@
 package cn.jjdcn.etas.manage.service.impl;
 
-import cn.jjdcn.etas.manage.dao.DiseaseDao;
 import cn.jjdcn.etas.fdfs.entity.Picture;
+import cn.jjdcn.etas.manage.dao.DiseaseDao;
 import cn.jjdcn.etas.manage.entity.Disease;
+import cn.jjdcn.etas.manage.feign.DiseaseIndexClient;
 import cn.jjdcn.etas.manage.feign.PictureClient;
+import cn.jjdcn.etas.manage.pojo.dto.DiseaseDto;
 import cn.jjdcn.etas.manage.pojo.vo.DiseaseVO;
 import cn.jjdcn.etas.manage.service.DiseaseService;
-import cn.jjdcn.etas.manage.pojo.dto.DiseaseDto;
 import com.google.common.base.Joiner;
 import com.google.common.collect.Maps;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -22,11 +26,14 @@ import java.util.stream.Collectors;
  * @author jjdcn
  * @since 2020-03-09 14:14:29
  */
+@Slf4j
 @Service("diseaseService")
 public class DiseaseServiceImpl implements DiseaseService {
     @Resource
     private DiseaseDao diseaseDao;
 
+    @Autowired
+    private DiseaseIndexClient diseaseIndexClient;
 
     @Autowired
     private PictureClient pictureClient;
@@ -38,7 +45,9 @@ public class DiseaseServiceImpl implements DiseaseService {
      * @return 实例对象
      */
     @Override
+    @Cacheable(value = "disease", key = "#id")
     public DiseaseVO queryById(Integer id) {
+        log.info("查询了ID: {}", id);
         Disease disease = this.diseaseDao.queryById(id);
         List<Picture> pictures1 = pictureClient.doQueryPictureByIds(disease.getPathogenPic() == null ? "" : disease.getPathogenPic());
         List<Picture> pictures2 = pictureClient.doQueryPictureByIds(disease.getSymptomsPic() == null ? "" : disease.getSymptomsPic());
@@ -110,6 +119,23 @@ public class DiseaseServiceImpl implements DiseaseService {
                 .pathogenType(diseaseDto.getPathogenType())
                 .status(0).userId(1).clickCount(0).build();
         this.diseaseDao.insert(disease);
+
+        diseaseIndexClient.updateDisease(
+                cn.jjdcn.etas.search.pojo.Disease.builder()
+                        .name(diseaseDto.getName())
+                        .classClass(diseaseDto.getClassClass())
+                        .classDomain(diseaseDto.getClassDomain())
+                        .classFamily(diseaseDto.getClassFamily())
+                        .classGenus(diseaseDto.getClassGenus())
+                        .classOrder(diseaseDto.getClassOrder())
+                        .classPhylum(diseaseDto.getClassPhylum())
+                        .classSpecies(diseaseDto.getClassSpecies())
+                        .pathogenDesc(diseaseDto.getPathogenDesc())
+                        .symptomsDesc(diseaseDto.getSymptomsDesc())
+                        .prevention(diseaseDto.getPrevention())
+                        .virusType(diseaseDto.getVirusType())
+                        .pathogenType(diseaseDto.getPathogenType())
+                        .build());
         return disease;
     }
 
@@ -120,6 +146,7 @@ public class DiseaseServiceImpl implements DiseaseService {
      * @return int
      */
     @Override
+    @CacheEvict(value = "disease", key = "#diseaseDto.id")
     public int update(DiseaseDto diseaseDto) {
         Disease disease = Disease.builder()
                 .id(diseaseDto.getId())
@@ -139,6 +166,25 @@ public class DiseaseServiceImpl implements DiseaseService {
                 .virusType(diseaseDto.getVirusType())
                 .pathogenType(diseaseDto.getPathogenType())
                 .build();
+
+        diseaseIndexClient.updateDisease(
+                cn.jjdcn.etas.search.pojo.Disease.builder()
+                .id(diseaseDto.getId())
+                .name(diseaseDto.getName())
+                .classClass(diseaseDto.getClassClass())
+                .classDomain(diseaseDto.getClassDomain())
+                .classFamily(diseaseDto.getClassFamily())
+                .classGenus(diseaseDto.getClassGenus())
+                .classOrder(diseaseDto.getClassOrder())
+                .classPhylum(diseaseDto.getClassPhylum())
+                .classSpecies(diseaseDto.getClassSpecies())
+                .pathogenDesc(diseaseDto.getPathogenDesc())
+                .symptomsDesc(diseaseDto.getSymptomsDesc())
+                .prevention(diseaseDto.getPrevention())
+                .virusType(diseaseDto.getVirusType())
+                .pathogenType(diseaseDto.getPathogenType())
+                .build());
+
         return this.diseaseDao.update(disease);
 
     }
@@ -151,6 +197,7 @@ public class DiseaseServiceImpl implements DiseaseService {
      */
     @Override
     public boolean deleteById(Integer id) {
+        diseaseIndexClient.deleteDiseaseById(id);
         return this.diseaseDao.deleteById(id) > 0;
     }
 

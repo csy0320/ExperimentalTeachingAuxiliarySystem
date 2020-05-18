@@ -44,7 +44,12 @@ class EtasSearchApplicationTests {
     @Autowired
     private RestHighLevelClient restHighLevelClient;
 
+
     private static final Gson gson = new Gson();
+
+    /**
+     * 创建索引和映射
+     */
     @Test
     void contextLoads() {
         this.restTemplate.createIndex(Disease.class);
@@ -148,6 +153,6 @@ class EtasSearchApplicationTests {
 
     @Test
     void test(){
-        System.out.println("Disease.builder().build() = " + Disease.builder().build().toString());
-}
+
+    }
 }

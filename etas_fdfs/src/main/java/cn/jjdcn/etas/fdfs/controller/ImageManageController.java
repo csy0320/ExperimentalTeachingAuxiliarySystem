@@ -1,5 +1,6 @@
 package cn.jjdcn.etas.fdfs.controller;
 
+import cn.jjdcn.etas.fdfs.auth.annotation.CheckAuth;
 import cn.jjdcn.etas.fdfs.entity.Picture;
 import cn.jjdcn.etas.fdfs.service.PictureService;
 import cn.jjdcn.etas.fdfs.utils.MyFastDFSClient;
@@ -45,6 +46,7 @@ public class ImageManageController {
     }
 
     @PostMapping("delete")
+    @CheckAuth
     public ResponseEntity<String> uploadImage(@RequestParam("fileId") String fileId) throws IOException {
         log.info("fileid:{}", fileId);
         boolean deleted = pictureService.deleteImage(fileId);

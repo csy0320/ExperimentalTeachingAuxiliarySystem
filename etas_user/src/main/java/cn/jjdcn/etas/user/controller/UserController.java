@@ -1,23 +1,22 @@
 package cn.jjdcn.etas.user.controller;
 
-import java.util.Arrays;
-
-
 import cn.jjdcn.etas.common.bean.PageVo;
 import cn.jjdcn.etas.common.bean.QueryCondition;
 import cn.jjdcn.etas.common.bean.Result;
+import cn.jjdcn.etas.user.entity.User;
+import cn.jjdcn.etas.user.service.UserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.web.bind.annotation.*;
 
-import cn.jjdcn.etas.user.entity.User;
-import cn.jjdcn.etas.user.service.UserService;
-
 import javax.servlet.http.HttpServletRequest;
+import java.util.Arrays;
+import java.util.UUID;
 
 /**
  * @author jjdcn
@@ -96,10 +95,12 @@ public class UserController {
      */
     @ApiOperation("修改")
     @PostMapping("update")
-//    @PreAuthorize("hasAuthority('user:user:update')")
     public Result<Object> update(@RequestBody User user) {
-        userService.updateById(user);
-
+        User newUser = userService.getById(user.getId());
+        String salt = UUID.randomUUID().toString().substring(0,6);
+        newUser.setSalt(salt);
+        newUser.setPassword(DigestUtils.md5Hex(user.getPassword()+salt));
+        userService.updateUser(newUser);
         return Result.ok().data(null);
     }
 

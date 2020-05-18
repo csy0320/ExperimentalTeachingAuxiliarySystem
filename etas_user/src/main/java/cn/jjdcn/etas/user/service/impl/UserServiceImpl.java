@@ -3,20 +3,18 @@ package cn.jjdcn.etas.user.service.impl;
 import cn.jjdcn.etas.common.bean.PageVo;
 import cn.jjdcn.etas.common.bean.Query;
 import cn.jjdcn.etas.common.bean.QueryCondition;
+import cn.jjdcn.etas.user.entity.User;
+import cn.jjdcn.etas.user.mapper.UserMapper;
+import cn.jjdcn.etas.user.service.UserService;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.UUID;
-
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-
-import cn.jjdcn.etas.user.mapper.UserMapper;
-import cn.jjdcn.etas.user.entity.User;
-import cn.jjdcn.etas.user.service.UserService;
 
 
 @Service("userService")
@@ -59,10 +57,23 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     @Override
     public User selectOneByUsernameAndPassword(String username, String password) {
         QueryWrapper<User> wrapper = new QueryWrapper<>();
-        wrapper.like("username",username);
+        wrapper.eq("username",username);
         User user = userMapper.selectOne(wrapper);
-        wrapper.like("password",DigestUtils.md5Hex(password+user.getSalt()));
+        if (user == null) return null;
+        wrapper.eq("password",DigestUtils.md5Hex(password + user.getSalt()));
         return userMapper.selectOne(wrapper);
+    }
+
+    @Override
+    public Boolean updateUser(User user) {
+        QueryWrapper<User> wrapper = new QueryWrapper<>();
+        wrapper.eq("id",user.getId());
+        Integer userCount = userMapper.selectCount(wrapper);
+        if(userCount >= 1){
+            this.userMapper.updateById(user);
+            return true;
+        }
+        return false;
     }
 
 }

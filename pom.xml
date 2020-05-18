@@ -19,6 +19,7 @@
         <module>etas_manage</module>
         <module>etas_fdfs</module>
         <module>etas_search</module>
+        <module>etas_search_interface</module>
         <module>etas_user_interface</module>
         <module>etas_manage_interface</module>
         <module>etas_app</module>

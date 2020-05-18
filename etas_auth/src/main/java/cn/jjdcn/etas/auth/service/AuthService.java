@@ -13,11 +13,11 @@ public class AuthService {
     @Autowired
     private UserClient userClient;
 
-    public Object accredit(String username, String password) {
+    public String accredit(String username, String password) {
         Result<User> result = userClient.doQueryUser(username, password);
         User user = result.getData();
         if (user == null) {
-            return null;
+            return "";
         }
 
         String jwt = MyJwtUtil.createJWT(user.getId(), user.getUsername());

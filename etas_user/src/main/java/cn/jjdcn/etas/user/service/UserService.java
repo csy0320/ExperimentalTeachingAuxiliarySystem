@@ -20,5 +20,7 @@ public interface UserService extends IService<User> {
     Boolean registerUser(User user);
 
     User selectOneByUsernameAndPassword(String username, String password);
+
+    Boolean updateUser(User user);
 }
 

@@ -1,6 +1,7 @@
 package cn.jjdcn.etas.fdfs.controller;
 
 import cn.jjdcn.etas.common.bean.Result;
+import cn.jjdcn.etas.fdfs.auth.annotation.CheckAuth;
 import cn.jjdcn.etas.fdfs.entity.Picture;
 import cn.jjdcn.etas.fdfs.service.PictureService;
 import lombok.extern.slf4j.Slf4j;
@@ -99,6 +100,7 @@ public class PictureController {
 	 * @return
 	 */
 	@PostMapping("add")
+	@CheckAuth
 	public Result add(@RequestBody Picture picture) {
 
 		Picture added = pictureService.insert(picture);
@@ -118,6 +120,7 @@ public class PictureController {
 	 * @return
 	 */
 	@PutMapping("update")
+	@CheckAuth
 	public Result update(@RequestBody Picture picture) {
 		Picture updated = pictureService.update(picture);
 		if (updated != null) {
@@ -136,6 +139,7 @@ public class PictureController {
 	 * @return
 	 */
 	@DeleteMapping("delete/{id}")
+	@CheckAuth
 	public Result delete(@PathVariable Integer id) {
 		log.info("delete image ID:{}",id);
 		if (pictureService.deleteById(id)) {
