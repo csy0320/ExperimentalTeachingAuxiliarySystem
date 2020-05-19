@@ -7,6 +7,7 @@ import cn.jjdcn.etas.fdfs.utils.MyFastDFSClient;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -90,6 +91,10 @@ public class PictureServiceImpl implements PictureService {
 
     @Override
     public List<Picture> queryByIds(List ids) {
-        return pictureDao.queryByIds(ids);
+        if (ids.size() == 0) {
+            return new ArrayList<>();
+        } else {
+            return pictureDao.queryByIds(ids);
+        }
     }
 }
