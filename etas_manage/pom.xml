@@ -59,7 +59,7 @@
         </dependency>
         <dependency>
             <groupId>cn.jjdcn.etas</groupId>
-            <artifactId>etas-fdfs</artifactId>
+            <artifactId>etas-fdfs-interface</artifactId>
             <version>0.0.1</version>
             <scope>compile</scope>
         </dependency>

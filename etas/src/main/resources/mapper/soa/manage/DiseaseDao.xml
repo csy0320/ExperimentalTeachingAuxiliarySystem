@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.jjdcn.soa.etas.mapper.manage.DiseaseMapper">
+
+    <resultMap type="cn.jjdcn.soa.etas.entity.Disease" id="DiseaseMap">
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="name" column="name" jdbcType="VARCHAR"/>
+        <result property="symptomsPic" column="symptoms_pic" jdbcType="VARCHAR"/>
+        <result property="symptomsDesc" column="symptoms_desc" jdbcType="VARCHAR"/>
+        <result property="pathogenPic" column="pathogen_pic" jdbcType="VARCHAR"/>
+        <result property="pathogenDesc" column="pathogen_desc" jdbcType="VARCHAR"/>
+        <result property="prevention" column="prevention" jdbcType="VARCHAR"/>
+        <result property="classDomain" column="class_domain" jdbcType="VARCHAR"/>
+        <result property="classPhylum" column="class_phylum" jdbcType="VARCHAR"/>
+        <result property="classFamily" column="class_family" jdbcType="VARCHAR"/>
+        <result property="classOrder" column="class_order" jdbcType="VARCHAR"/>
+        <result property="classClass" column="class_class" jdbcType="VARCHAR"/>
+        <result property="classGenus" column="class_genus" jdbcType="VARCHAR"/>
+        <result property="classSpecies" column="class_species" jdbcType="VARCHAR"/>
+        <result property="virusType" column="virus_type" jdbcType="VARCHAR"/>
+        <result property="status" column="status" jdbcType="INTEGER"/>
+        <result property="userId" column="user_id" jdbcType="INTEGER"/>
+        <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+        <result property="clickCount" column="click_count" jdbcType="INTEGER"/>
+        <result property="pathogenType" column="pathogen_type" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="DiseaseMap">
+        select
+          id, name, symptoms_pic, symptoms_desc, pathogen_pic, pathogen_desc, prevention, class_domain, class_phylum, class_family, class_order, class_class, class_genus, class_species, virus_type, status, user_id, create_time, click_count, pathogen_type
+        from etas_manage.disease
+        where id = #{id}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="DiseaseMap">
+        select
+          id, name, symptoms_pic, symptoms_desc, pathogen_pic, pathogen_desc, prevention, class_domain, class_phylum, class_family, class_order, class_class, class_genus, class_species, virus_type, status, user_id, create_time, click_count, pathogen_type
+        from etas_manage.disease
+        limit #{offset}, #{limit}
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAll" resultMap="DiseaseMap">
+        select
+          id, name, symptoms_pic, symptoms_desc, pathogen_pic, pathogen_desc, prevention, class_domain, class_phylum, class_family, class_order, class_class, class_genus, class_species, virus_type, status, user_id, create_time, click_count, pathogen_type
+        from etas_manage.disease
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="name != null and name != ''">
+                and name = #{name}
+            </if>
+            <if test="symptomsPic != null and symptomsPic != ''">
+                and symptoms_pic = #{symptomsPic}
+            </if>
+            <if test="symptomsDesc != null and symptomsDesc != ''">
+                and symptoms_desc = #{symptomsDesc}
+            </if>
+            <if test="pathogenPic != null and pathogenPic != ''">
+                and pathogen_pic = #{pathogenPic}
+            </if>
+            <if test="pathogenDesc != null and pathogenDesc != ''">
+                and pathogen_desc = #{pathogenDesc}
+            </if>
+            <if test="prevention != null and prevention != ''">
+                and prevention = #{prevention}
+            </if>
+            <if test="classDomain != null and classDomain != ''">
+                and class_domain = #{classDomain}
+            </if>
+            <if test="classPhylum != null and classPhylum != ''">
+                and class_phylum = #{classPhylum}
+            </if>
+            <if test="classFamily != null and classFamily != ''">
+                and class_family = #{classFamily}
+            </if>
+            <if test="classOrder != null and classOrder != ''">
+                and class_order = #{classOrder}
+            </if>
+            <if test="classClass != null and classClass != ''">
+                and class_class = #{classClass}
+            </if>
+            <if test="classGenus != null and classGenus != ''">
+                and class_genus = #{classGenus}
+            </if>
+            <if test="classSpecies != null and classSpecies != ''">
+                and class_species = #{classSpecies}
+            </if>
+            <if test="virusType != null and virusType != ''">
+                and virus_type = #{virusType}
+            </if>
+            <if test="status != null">
+                and status = #{status}
+            </if>
+            <if test="userId != null">
+                and user_id = #{userId}
+            </if>
+            <if test="createTime != null">
+                and create_time = #{createTime}
+            </if>
+            <if test="clickCount != null">
+                and click_count = #{clickCount}
+            </if>
+            <if test="pathogenType != null and pathogenType != ''">
+                and pathogen_type = #{pathogenType}
+            </if>
+        </where>
+    </select>
+    <!--通过实体作为筛选条件查询-->
+    <select id="countAllByFilter" resultType="int">
+        select
+          count(1)
+        from etas_manage.disease
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="name != null and name != ''">
+                and name = #{name}
+            </if>
+            <if test="symptomsPic != null and symptomsPic != ''">
+                and symptoms_pic = #{symptomsPic}
+            </if>
+            <if test="symptomsDesc != null and symptomsDesc != ''">
+                and symptoms_desc = #{symptomsDesc}
+            </if>
+            <if test="pathogenPic != null and pathogenPic != ''">
+                and pathogen_pic = #{pathogenPic}
+            </if>
+            <if test="pathogenDesc != null and pathogenDesc != ''">
+                and pathogen_desc = #{pathogenDesc}
+            </if>
+            <if test="prevention != null and prevention != ''">
+                and prevention = #{prevention}
+            </if>
+            <if test="classDomain != null and classDomain != ''">
+                and class_domain = #{classDomain}
+            </if>
+            <if test="classPhylum != null and classPhylum != ''">
+                and class_phylum = #{classPhylum}
+            </if>
+            <if test="classFamily != null and classFamily != ''">
+                and class_family = #{classFamily}
+            </if>
+            <if test="classOrder != null and classOrder != ''">
+                and class_order = #{classOrder}
+            </if>
+            <if test="classClass != null and classClass != ''">
+                and class_class = #{classClass}
+            </if>
+            <if test="classGenus != null and classGenus != ''">
+                and class_genus = #{classGenus}
+            </if>
+            <if test="classSpecies != null and classSpecies != ''">
+                and class_species = #{classSpecies}
+            </if>
+            <if test="virusType != null and virusType != ''">
+                and virus_type = #{virusType}
+            </if>
+            <if test="status != null">
+                and status = #{status}
+            </if>
+            <if test="userId != null">
+                and user_id = #{userId}
+            </if>
+            <if test="createTime != null">
+                and create_time = #{createTime}
+            </if>
+            <if test="clickCount != null">
+                and click_count = #{clickCount}
+            </if>
+            <if test="pathogenType != null and pathogenType != ''">
+                and pathogen_type = #{pathogenType}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
+        insert into etas_manage.disease(name, symptoms_pic, symptoms_desc, pathogen_pic, pathogen_desc, prevention, class_domain, class_phylum, class_family, class_order, class_class, class_genus, class_species, virus_type, status, user_id, create_time, click_count, pathogen_type)
+        values (#{name}, #{symptomsPic}, #{symptomsDesc}, #{pathogenPic}, #{pathogenDesc}, #{prevention}, #{classDomain}, #{classPhylum}, #{classFamily}, #{classOrder}, #{classClass}, #{classGenus}, #{classSpecies}, #{virusType}, #{status}, #{userId}, #{createTime}, #{clickCount}, #{pathogenType})
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update etas_manage.disease
+        <set>
+            <if test="name != null and name != ''">
+                name = #{name},
+            </if>
+            <if test="symptomsPic != null and symptomsPic != ''">
+                symptoms_pic = #{symptomsPic},
+            </if>
+            <if test="symptomsDesc != null and symptomsDesc != ''">
+                symptoms_desc = #{symptomsDesc},
+            </if>
+            <if test="pathogenPic != null and pathogenPic != ''">
+                pathogen_pic = #{pathogenPic},
+            </if>
+            <if test="pathogenDesc != null and pathogenDesc != ''">
+                pathogen_desc = #{pathogenDesc},
+            </if>
+            <if test="prevention != null and prevention != ''">
+                prevention = #{prevention},
+            </if>
+            <if test="classDomain != null and classDomain != ''">
+                class_domain = #{classDomain},
+            </if>
+            <if test="classPhylum != null and classPhylum != ''">
+                class_phylum = #{classPhylum},
+            </if>
+            <if test="classFamily != null and classFamily != ''">
+                class_family = #{classFamily},
+            </if>
+            <if test="classOrder != null and classOrder != ''">
+                class_order = #{classOrder},
+            </if>
+            <if test="classClass != null and classClass != ''">
+                class_class = #{classClass},
+            </if>
+            <if test="classGenus != null and classGenus != ''">
+                class_genus = #{classGenus},
+            </if>
+            <if test="classSpecies != null and classSpecies != ''">
+                class_species = #{classSpecies},
+            </if>
+            <if test="virusType != null and virusType != ''">
+                virus_type = #{virusType},
+            </if>
+            <if test="status != null">
+                status = #{status},
+            </if>
+            <if test="userId != null">
+                user_id = #{userId},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime},
+            </if>
+            <if test="clickCount != null">
+                click_count = #{clickCount},
+            </if>
+            <if test="pathogenType != null and pathogenType != ''">
+                pathogen_type = #{pathogenType},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from etas_manage.disease where id = #{id}
+    </delete>
+
+    <select statementType="STATEMENT" id="queryBaseInfo" resultType="string" parameterType="string">
+        select distinct ${conlumName} from etas_manage.disease
+    </select>
+
+</mapper>

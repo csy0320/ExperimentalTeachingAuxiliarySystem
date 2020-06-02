@@ -8,7 +8,7 @@
         <version>0.0.1</version>
     </parent>
     <artifactId>etas-gateway</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.0.1</version>
     <name>etas-gateway</name>
     <description>Demo project for Spring Boot</description>
 

@@ -3,7 +3,7 @@ spring:
     hikari:
       connection-timeout: 5000
 server:
-  port: 8091
+  port: 8090
 
 mybatis-plus:
   global-config:
